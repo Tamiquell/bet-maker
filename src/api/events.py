@@ -8,27 +8,6 @@ from services.bets import BetService
 events_router = APIRouter(prefix="/events", tags=["Events"])
 
 
-@events_router.get("/init")
-async def init_events(uow: UOWDep):
-    bet = BetService(uow)
-    event = EventsService(uow, bet)
-    _ = await event.create_event(AddEventDTO(
-        team_1='Dinamo',
-        team_2='Belogorye',
-        status='in progress'
-    ))
-    _ = await event.create_event(AddEventDTO(
-        team_1='Zenit',
-        team_2='Shakhter',
-        status='in progress'
-    ))
-    _ = await event.create_event(AddEventDTO(
-        team_1='Trentino',
-        team_2='Chivitanova',
-        status='in progress'
-    ))
-
-
 @events_router.patch("/{event_id}")
 async def add_new_event(
         event_id: int,

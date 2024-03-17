@@ -18,9 +18,6 @@ config = context.config
 
 settings_pg = SettingsPostgres()
 s = settings_pg.dsn
-print('\n'*3)
-print(f"{s=}")
-print('\n'*3)
 
 config.set_main_option("sqlalchemy.url", s)
 

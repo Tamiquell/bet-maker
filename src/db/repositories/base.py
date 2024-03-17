@@ -38,10 +38,8 @@ class SQLAlchemyRepository(AbstractRepository):
         return res.scalar_one()
 
     async def edit_one(self, id: int, data: dict) -> int:
-        print(f"{data=}")
         stmt = update(self.model).values(
             **data).filter_by(id=id).returning(self.model.id)
-        print(f"{stmt=}")
         res = await self.session.execute(stmt)
         return res.scalar_one()
 

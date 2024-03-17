@@ -18,10 +18,6 @@ class EventsService:
     async def update_event(self, event_id: int, data: UpdateEventDTO):
         event_dict = data.model_dump(exclude_none=True)
         async with self.uow:
-            # update event itself
-            print(f"{event_dict=}")
-            print(f"{event_id=}")
-
             # update all event's bets
             bets = await self.bets_service.get_bets(event_id)
             bets_ids = [bet.id for bet in bets]
